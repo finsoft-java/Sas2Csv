@@ -17,7 +17,10 @@ public class Main {
 
 		// Usage
 		if (args.length == 0 || args[0].equals("-h") || args[0].equals("--help") || args[0].equals("/?")) {
-			System.err.println("Usage: java -jar Sas2Csv-jar <filename.sas7db>");
+			System.err.println("Usage:");
+			System.err.println("  java -jar sas2csv.jar <filename.sas7db>");
+			System.err.println("or");
+			System.err.println("  sas2csv.bat <filename.sas7db>");
 			System.err.println("File output is <filename>.csv");
 			return;
 		}
@@ -40,13 +43,12 @@ public class Main {
 		Writer writer = new FileWriter(outfilename);
 
 		// Write header
-		// CSVMetadataWriter csvMetadataWriter = new CSVMetadataWriterImpl(writer);
-		// csvMetadataWriter.writeMetadata(sasFileReader.getColumns());
 		CSVDataWriter csvDataWriter = new CSVDataWriterImpl(writer);
 		csvDataWriter.writeColumnNames(sasFileReader.getColumns());
 
 		// Write data
-		long numRows = sasFileReader.getSasFileProperties().getColumnsCount();
+		long numRows = sasFileReader.getSasFileProperties().getRowCount();
+		System.err.println("Writing " + numRows + " rows...");
 		for (int i = 0; i < numRows; ++i) {
 			csvDataWriter.writeRow(sasFileReader.getColumns(), sasFileReader.readNext());
 		}
@@ -57,6 +59,8 @@ public class Main {
 		} catch (IOException e) {
 			// do nothing
 		}
+
+		System.err.println("Done.");
 	}
 
 }
