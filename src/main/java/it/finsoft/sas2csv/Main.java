@@ -16,6 +16,9 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 
+		//debug
+		args = new String[] {"c:\\Users\\lucav\\Downloads\\migr_co_st1_2_err.sas7bdat"};
+		
 		// Usage
 		if (args.length == 0 || args[0].equals("-h") || args[0].equals("--help") || args[0].equals("/?")) {
 			System.err.println("Usage:");
@@ -51,8 +54,15 @@ public class Main {
 		// Write data
 		long numRows = sasFileReader.getSasFileProperties().getRowCount();
 		System.err.println("Writing " + numRows + " rows...");
-		for (int i = 0; i < numRows; ++i) {
-			csvDataWriter.writeRow(sasFileReader.getColumns(), sasFileReader.readNext());
+        long writtenRows = 0;
+		try {
+			for (writtenRows = 0; writtenRows < numRows; ++writtenRows) {
+				Object[] row = sasFileReader.readNext();
+				csvDataWriter.writeRow(sasFileReader.getColumns(), row);
+			}
+		} catch (Throwable t) {
+			System.err.println(writtenRows + " rows written.");
+            throw t;
 		}
 
 		// close file
