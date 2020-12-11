@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Locale;
 
 import com.epam.parso.CSVDataWriter;
 import com.epam.parso.SasFileReader;
@@ -43,7 +44,8 @@ public class Main {
 		Writer writer = new FileWriter(outfilename);
 
 		// Write header
-		CSVDataWriter csvDataWriter = new CSVDataWriterImpl(writer);
+        // TODO take parameters from CLI
+		CSVDataWriter csvDataWriter = new CSVDataWriterImpl(writer, ";", "\r\n", new Locale("it", "it"));
 		csvDataWriter.writeColumnNames(sasFileReader.getColumns());
 
 		// Write data
