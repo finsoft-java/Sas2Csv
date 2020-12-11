@@ -17,9 +17,8 @@ public class Main {
 
 		// Usage
 		if (args.length == 0 || args[0].equals("-h") || args[0].equals("--help") || args[0].equals("/?")) {
-			System.out.println("Usage: java -jar Sas2Csv-jar <filename.sas7db>");
-			System.out.println("Usage: java -jar Sas2Csv-jar <filename.sas7db>");
-			System.out.println("File output is <filename>.csv");
+			System.err.println("Usage: java -jar Sas2Csv-jar <filename.sas7db>");
+			System.err.println("File output is <filename>.csv");
 			return;
 		}
 
