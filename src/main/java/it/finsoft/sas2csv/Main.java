@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 
 		//debug
-		args = new String[] {"c:\\Users\\lucav\\Downloads\\migr_co_st1_2_err.sas7bdat"};
+		// args = new String[] {"c:\\Users\\lucav\\Downloads\\migr_co_st1_2_err.sas7bdat"};
 		
 		// Usage
 		if (args.length == 0 || args[0].equals("-h") || args[0].equals("--help") || args[0].equals("/?")) {
